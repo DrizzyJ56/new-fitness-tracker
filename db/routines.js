@@ -1,4 +1,5 @@
 const client = require('./client');
+const {attachActivitiesToRoutines} = require("./activities")
 
 // *** addActivityToRoutine() from routine_activities.js needs to be completed before you can pass the tests in this file. 
 
@@ -9,12 +10,32 @@ const client = require('./client');
 // create and returns the new routine
 // ** this function needs to be completed first because other tests rely on it. 
 async function createRoutine({creatorId, isPublic, name, goal}) {
+  try {
+    const {rows: [routine]} = await client.query(`
+      INSERT INTO routines("creatorId", "isPublic", name, goal)
+      VALUES ($1, $2, $3, $4)
+      RETURNING * ;
+    `, [creatorId, isPublic, name, goal])
+    return routine
+  } catch (error) {
+    throw error
+  }
 }
 
 
 
 // this function returns an array of all of the routines with their activities attached. Use the helper function attachActivitiesToRoutines() from "db/activities" to help with this. 
 async function getAllRoutines() {
+  try {
+    const {rows} = await client.query(`
+      SELECT routines.*, users.username AS "creatorName"
+      FROM routines
+      JOIN users ON routines."creatorId"=users.id;
+    `)
+    return attachActivitiesToRoutines(rows)
+  } catch (error) {
+    throw error
+  }
 }
 
 

@@ -12,7 +12,7 @@ const {
   createUser,  
   getUserByUsernameWithPassword, 
   getUser, 
-  // getUserById
+  getUserById
 } = require("../../db");
 
 describe("DB Users", () => {
@@ -142,7 +142,7 @@ describe("DB Users", () => {
   });
 
   describe("getUserById(userId)", () => {
-    xit("returns the user object where xit matches the passed in user id", async () => {
+    it("returns the user object where it matches the passed in user id", async () => {
       const fakeUserData = {
         username: "Sarah",
         password: "poiuytfvbnm",
@@ -154,7 +154,7 @@ describe("DB Users", () => {
       expect(user.id).toBe(newUser.id);
     });
 
-    xit("does not return the password", async () => {
+    it("does not return the password", async () => {
       const fakeUserData = {
         username: "Jonathan",
         password: "wertyhjkkjh",

@@ -12,7 +12,7 @@ async function createUser({ username, password }) {
       INSERT INTO users (username, password)
       VALUES ($1, $2)
       ON CONFLICT (username) DO NOTHING
-      RETURNING username;
+      RETURNING username,id
     `,[username, password])
 
     return user
@@ -47,7 +47,6 @@ async function getUser({ username, password }) {
       SELECT * FROM users
       WHERE username = $1 AND password = $2;
     `,[username, password])
-    console.log(user)
     if(!user){
       return 
     }
@@ -63,7 +62,18 @@ async function getUser({ username, password }) {
 
 // this function should return a single user (object) from the database that matches the id that is passed in as an argument.
 async function getUserById(userId) {
+  try {
+    const {rows: [user]} = await client.query(`
+      SELECT id,username FROM users
+      WHERE id=$1;
+    `,[userId])
 
+
+    return user
+
+  } catch (error) {
+    throw error
+  }
 }
 
 
