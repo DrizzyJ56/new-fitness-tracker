@@ -8,7 +8,12 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const client = require("../../db/client");
 
-const { createUser,  getUserByUsernameWithPassword, getUser, getUserById} = require("../../db");
+const { 
+  createUser,  
+  getUserByUsernameWithPassword, 
+  getUser, 
+  // getUserById
+} = require("../../db");
 
 describe("DB Users", () => {
   describe("createUser({ username, password })", () => {
@@ -67,7 +72,7 @@ describe("DB Users", () => {
   });
 
   describe("getUserByUsernameWithPassword(username)", () => {
-    xit("returns the user object if the username exists in the database", async () => {
+    it("returns the user object if the username exists in the database", async () => {
       const fakeUserData = {
         username: "Bob",
         password: "cvbnmjbgtr",
@@ -81,7 +86,7 @@ describe("DB Users", () => {
       expect(user.username).toBe(fakeUserData.username);
     });
 
-    xit("Does not return the user object if the username is not present in the database", async () => {
+    it("Does not return the user object if the username is not present in the database", async () => {
       const fakeUserData = {
         username: "Pete",
         password: "ertycvbnmkjhgfds",
@@ -96,7 +101,7 @@ describe("DB Users", () => {
   });
 
   describe("getUser({ username, password })", () => {
-    xit("returns the user when the password verifies", async () => {
+    it("returns the user when the password verifies", async () => {
       const fakeUserData = {
         username: "Nicole",
         password: "6ygfe6ijbgtr",
@@ -109,7 +114,7 @@ describe("DB Users", () => {
       expect(user.username).toBe(fakeUserData.username);
     });
 
-    xit("Does not return the user if the password doesn't verify", async () => {
+    it("Does not return the user if the password doesn't verify", async () => {
       const fakeUserData = {
         username: "Issac",
         password: "ertyuiokjhgfds",
@@ -125,7 +130,7 @@ describe("DB Users", () => {
       expect(user).toBeFalsy();
     });
 
-    xit("Does NOT return the password", async () => {
+    it("Does NOT return the password", async () => {
       const fakeUserData = {
         username: "Michael",
         password: "jhtdxcvbnm",
