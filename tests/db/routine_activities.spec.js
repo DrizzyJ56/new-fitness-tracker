@@ -64,7 +64,7 @@ describe("DB Routine Activities", () => {
   })
 
   describe("getRoutineActivityById(id)", () => {
-    xit("should return the routine activity by id", async () => {
+    it("should return the routine activity by id", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity()
       const routineActivity = await getRoutineActivityById(
         fakeRoutineActivity.id
@@ -74,7 +74,7 @@ describe("DB Routine Activities", () => {
   })
 
   describe("getRoutineActivitiesByRoutine({id})", () => {
-    xit("should return the routine activities for a routine", async () => {
+    it("should return the routine activities for a routine", async () => {
       const fakeUser = await createFakeUser("Timmy")
       const fakeActivity = await createFakeActivity("Fortnite", "I know xit's not exercise")
       const fakeRoutine = await createFakePublicRoutine(fakeUser.id, "Every waking hour", "Until my mom yells at me")
@@ -90,7 +90,7 @@ describe("DB Routine Activities", () => {
   
 
   describe("updateRoutineActivity({ id, ...fields })", () => {
-    xit("Finds the routine with id equal to the passed in id. Updates the count or duration as necessary.", async () => {
+    it("Finds the routine with id equal to the passed in id. Updates the count or duration as necessary.", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
 
       const newRoutineActivityData = {
@@ -113,7 +113,7 @@ describe("DB Routine Activities", () => {
   })
 
   describe("destroyRoutineActivity(id)", () => {
-    xit("remove routine_activity from database", async () => {
+    it("remove routine_activity from database", async () => {
       const fakeRoutineActivity = await createFakeRoutineActivity();
 
       const deletedRoutine = await destroyRoutineActivity(
@@ -129,7 +129,7 @@ describe("DB Routine Activities", () => {
   })
 
   describe("canEditRoutineActivity(routineActivityId, userId)", () => {
-    xit("should return true if routine activity can be edited by user", async () => {
+    it("should return true if routine activity can be edited by user", async () => {
       const fakeUser = await createFakeUser("Jay");
       const fakeRoutine = await createFakePublicRoutine(fakeUser.id, "At 3pm", "Forever");
       const fakeRoutineActivity = await createFakeRoutineActivity(fakeRoutine.id);
@@ -137,7 +137,7 @@ describe("DB Routine Activities", () => {
       expect(canEdit).toBeTruthy();
     })
 
-    xit("should return false if routine activity can not be edited by user", async () => {
+    it("should return false if routine activity can not be edited by user", async () => {
       const fakeUser = await createFakeUser("Kevin");
       const anotherUser = await createFakeUser("Kyle");
       const fakeRoutine = await createFakePublicRoutine(fakeUser.id, "At 6pm", "Forever");
