@@ -18,12 +18,29 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 app.get('/', (req, res) => {
   res.redirect('/docs');
 });
 
 const apiRouter = require('./api');
 app.use('/api', apiRouter);
+
+// 404 handler
+app.get("*", (req, res) => {
+  res.status(404).send({
+    name: "404 - Not Found",
+    message: "No route found for the requested URL",
+  });
+});
+
+// error handling middleware
+app.use((error, req, res, next) => {
+  console.error("SERVER ERROR: ", error);
+  if (res.statusCode < 400) res.status(500);
+  res.send({ name: error.name, message: error.message });
+});
 
 const  client  = require('./db/client');
 client.connect();

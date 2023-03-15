@@ -129,7 +129,7 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("POST /api/users/login", () => {
+  describe("POST /api/users/login", () => {
     it("Logs in the user. Requires username and password, and verifies that hashed login password matches the saved hashed password.", async () => {
       const { data } = await axios.post(`${API_URL}/api/users/login`, newUser);
       token = data.token;
@@ -142,12 +142,11 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("GET /api/users/me", () => {
+  describe("GET /api/users/me", () => {
     it("sends back users data if valid token is supplied in header", async () => {
       const { data } = await axios.get(`${API_URL}/api/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       expect(data.username).toBeTruthy();
       expect(data.username).toBe(registeredUser.username);
     });
@@ -163,7 +162,7 @@ describe("/api/users", () => {
     });
   });
 
-  xdescribe("GET /api/users/:username/routines", () => {
+  describe("GET /api/users/:username/routines", () => {
     it("Gets a list of public routines for a particular user.", async () => {
       const userId = 2;
       const userWithRoutines = await getUserById(userId);
