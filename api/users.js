@@ -3,11 +3,47 @@ const usersRouter = express.Router();
 const jwt = require("jsonwebtoken")
 
 const {users, getUser, createUser, getUserByUsernameWithPassword} = require('../db/index');
+const {requireUser} = require('../api/utils')
 // POST /api/users/login
+usersRouter.post('/login', async (req,res,next) => {
+    const { username, password } = req.body
+    if(!username || !password){
+        next({
+            name: "LoginERROR",
+            message: "Invalid Username or Password"
+        })
+    }
+    try{
+        const user = await getUserByUsernameWithPassword(username)
+        if(user && user.password==password){
+            const token = jwt.sign(
+                {
+                    id: user.id,
+                    username: user.username,
+                },
+                process.env.JWT_SECRET
+            )
+            res.send(
+                {
+                    token: token
+                }
+            )
+        }else{
+            next(
+                {
+                    name: "IncorrectCredentialsError", 
+                    message: "Username or Password is incorrect"
+                }
+            )
+        }
+    }catch({name, message}){
+        next({name, message})
+    }
+})
 
 // POST /api/users/register
 usersRouter.post('/register', async (req,res,next) => {
-    const { username, password} = req.body;
+    const { username, password } = req.body;
     try {
         const doesUserExist = await getUserByUsernameWithPassword(username)
         if(doesUserExist){
@@ -47,6 +83,25 @@ usersRouter.post('/register', async (req,res,next) => {
 })
 
 // GET /api/users/me
+usersRouter.get('/me', requireUser, async (req,res,next) => {
+    console.log(req.user, "!!!!!!!!!!!!!!!!!!!!!")
+    try{
+        console.log(req.user, "!!!!!!!!!!!!!!!AAAAAAA")
+        if(!req.user){
+            next(
+                {
+                    name: "UserError", 
+                    message: "Need to log in"
+                }
+            )
+        }
+        res.send(req.user)
+
+    }catch(error){
+        console.log(error)
+        next(error)
+    }
+})
 
 // GET /api/users/:username/routines
 
