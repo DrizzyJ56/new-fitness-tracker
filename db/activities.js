@@ -1,100 +1,109 @@
-const client = require("./client")
+const client = require("./client");
 
 // Work on this file SECOND
 
 // activities functions
 
 // create and returns the new activity
-// ** this function needs to be completed first because other tests rely on it. 
+// ** this function needs to be completed first because other tests rely on it.
 async function createActivity({ name, description }) {
   try {
-    const {rows: [activity]} = await client.query(`
+    const {
+      rows: [activity],
+    } = await client.query(
+      `
       INSERT INTO activities(name, description)
       VALUES ($1, $2)
       RETURNING *
-    `, [name, description])
+    `,
+      [name, description]
+    );
 
-    return activity
+    return activity;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
-
-
 
 // this function returns an array of all of the activities
 async function getAllActivities() {
   try {
-    const {rows} = await client.query(`
+    const { rows } = await client.query(`
       SELECT * FROM activities
-    `)
+    `);
 
-    return rows
+    return rows;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
-
-
-// this function should return a single activity (object) from the database that matches the name that is passed in as an argument. 
+// this function should return a single activity (object) from the database that matches the name that is passed in as an argument.
 async function getActivityByName(name) {
   try {
-    const {rows: [activity]} = await client.query(`
+    const {
+      rows: [activity],
+    } = await client.query(
+      `
         SELECT * FROM activities
         WHERE name=$1
-    `,[name])
+    `,
+      [name]
+    );
 
-    return activity
+    return activity;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
-
-
 
 // this function should return a single activity (object) from the database that matches the id that is passed in as an argument.
 async function getActivityById(id) {
   try {
-    const {rows: [activity]} = await client.query(`
+    const {
+      rows: [activity],
+    } = await client.query(
+      `
         SELECT * FROM activities
         WHERE id=$1
-    `,[id])
+    `,
+      [id]
+    );
 
-    return activity
+    return activity;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
-
-
 // The id should not be changed
-// You should be able to update the name, or the description, or name & description. 
+// You should be able to update the name, or the description, or name & description.
 // return the updated activity
 async function updateActivity({ id, ...fields }) {
-  const setString = Object.keys(fields).map((key,idx) => `"${key}"=$${idx + 1}`).join(", ")
-  
+  const setString = Object.keys(fields)
+    .map((key, idx) => `"${key}"=$${idx + 1}`)
+    .join(", ");
+
   try {
-    if(setString.length){
-      await client.query(`
+    if (setString.length) {
+      await client.query(
+        `
         UPDATE activities
         SET ${setString}
         WHERE id=${id}
         RETURNING *
-      `,Object.values(fields))
+      `,
+        Object.values(fields)
+      );
 
-      return await getActivityById(id)
+      return await getActivityById(id);
     }
-
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
-
-
-// Do NOT modify the attachActivitiesToRoutines function.  You will need to use this function in your routines.js file whenever you need to attach activities to your routines. 
+// Do NOT modify the attachActivitiesToRoutines function.  You will need to use this function in your routines.js file whenever you need to attach activities to your routines.
 async function attachActivitiesToRoutines(routines) {
   // no side effects
   const routinesToReturn = [...routines];
@@ -135,5 +144,5 @@ module.exports = {
   getActivityByName,
   createActivity,
   updateActivity,
-  attachActivitiesToRoutines
-}
+  attachActivitiesToRoutines,
+};

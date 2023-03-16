@@ -8,7 +8,7 @@ const {
   createUser,
   getUserByUsernameWithPassword,
   getPublicRoutinesByUser,
-  getAllRoutinesByUser
+  getAllRoutinesByUser,
 } = require("../db/index");
 const { requireUser } = require("../api/utils");
 // POST /api/users/login
@@ -95,32 +95,31 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
       });
     }
     res.send(req.user);
-  } catch ({name, message}) {
-    next({name, message});
+  } catch ({ name, message }) {
+    next({ name, message });
   }
 });
 
 // GET /api/users/:username/routines
-usersRouter.get("/:username/routines", async (req,res,next) => {
-    try {
-        const {username} = req.params
-        const user = await getUserByUsernameWithPassword(username)
-        if(!user){
-            next({
-                name: "UserDoesNotExistError",
-                message: "This user does not exist"
-            })    
-        }else if(req.user && req.user.id === user.id){
-            const routines = await getAllRoutinesByUser(user)
-            res.send(routines)
-        } else{
-            const routines = await getPublicRoutinesByUser(user)
-            res.send(routines)
-        }
-        
-    } catch ({name,message}) {
-        next({name, message})
+usersRouter.get("/:username/routines", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const user = await getUserByUsernameWithPassword(username);
+    if (!user) {
+      next({
+        name: "UserDoesNotExistError",
+        message: "This user does not exist",
+      });
+    } else if (req.user && req.user.id === user.id) {
+      const routines = await getAllRoutinesByUser(user);
+      res.send(routines);
+    } else {
+      const routines = await getPublicRoutinesByUser(user);
+      res.send(routines);
     }
-})
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
 
 module.exports = usersRouter;
