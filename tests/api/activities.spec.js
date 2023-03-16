@@ -96,7 +96,7 @@ describe("/api/activities", () => {
     });
   });
 
-  xdescribe("GET /api/activities/:activityId/routines", () => {
+  describe("GET /api/activities/:activityId/routines", () => {
     beforeAll(async () => {
       try {
         await axios.get(`${API_URL}/api/activities/10000/routines`);
@@ -122,7 +122,7 @@ describe("/api/activities", () => {
     });
   });
 
-  xdescribe("POST /api/activities", () => {
+  describe("POST /api/activities", () => {
     const activityToTestDuplicateErrorHandling = {
       name: "pull ups are very useful",
       description: "they take time and consistent effort to improve",
@@ -179,7 +179,7 @@ describe("/api/activities", () => {
     });
   });
 
-  xdescribe("PATCH /api/activities/:activityId", () => {
+  describe("PATCH /api/activities/:activityId", () => {
     let createdActivityToBePatched;
     let errorForWhenAnActivityDoesNotExist;
     let dataForActivityThatWillBeUsedToCheckTheErrorHandling;
