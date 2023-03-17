@@ -6,6 +6,7 @@
   "scripts": {
     "seed:dev": "nodemon ./db/seed.js",
     "seed": "node ./db/seed.js",
+    "build": "npm i && npm run seed",
     "start:dev": "nodemon server.js",
     "start": "node server.js",
     "test": "jest --runInBand",
