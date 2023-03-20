@@ -47,9 +47,10 @@ usersRouter.post("/login", async (req, res, next) => {
 // POST /api/users/register
 usersRouter.post("/register", async (req, res, next) => {
   const info = req.body;
+  const username = info.username
   
   try {
-    const doesUserExist = await getUserByUsernameWithPassword(info.username);
+    const doesUserExist = await getUserByUsernameWithPassword(username);
     if (doesUserExist) {
       next({
         name: "userAlreadyExistsError",
