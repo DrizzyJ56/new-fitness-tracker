@@ -21,7 +21,7 @@ async function addActivityToRoutine({
     `,
       [routineId, activityId, count, duration]
     );
-    client.release()
+    
     return routineActivity;
   } catch (error) {
     throw error;
@@ -43,7 +43,7 @@ async function getRoutineActivityById(id) {
       `,
       [id]
     );
-    client.release()
+    
     return routine;
   } catch (error) {
     throw error;
@@ -61,7 +61,7 @@ async function getRoutineActivitiesByRoutine({ id }) {
       `,
       [id]
     );
-    client.release()
+    
     return rows;
   } catch (error) {
     throw error;
@@ -87,7 +87,7 @@ async function updateRoutineActivity({ id, ...fields }) {
         `,
         Object.values(fields)
       );
-      client.release()
+      
       return getRoutineActivityById(id);
     }
   } catch (error) {
@@ -106,7 +106,7 @@ async function destroyRoutineActivity(id) {
       WHERE id=${id}
       RETURNING *;
     `);
-    client.release()
+    
     return routine;
   } catch (error) {
     throw error;
@@ -131,7 +131,7 @@ async function canEditRoutineActivity(routineActivityId, userId) {
     if (routine?.creatorId === userId) {
       return true;
     }
-    client.release()
+    
     return false;
   } catch (error) {
     throw error;
