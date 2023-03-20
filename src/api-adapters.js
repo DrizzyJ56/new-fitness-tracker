@@ -39,3 +39,35 @@ export const loginUserToDatabase = async (username, password) =>{
         console.error(err);
       }
 }
+
+export const RoutinesDatabase = async () => {
+  try {
+  const response = await fetch(`${BASE_URL}/routines`, {
+    headers: {
+    'Content-Type': 'application/json',
+    },
+  });
+  
+  const result = await response.json();
+  return result
+  } catch (err) {
+  console.error(err);
+  }
+}
+
+export const ActivitiesDatabase = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
