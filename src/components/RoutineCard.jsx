@@ -12,7 +12,7 @@ const RoutineCard = (props) => {
                 <h5>{`Activities:`}</h5>
                     {routine.activities.map((activity, idx) => {
                         return(
-                            <div className="Activity">
+                            <div className="Activity" key={idx}>
                                 <h6>{`Name: ${activity.name}`}</h6>
                                 <h6>{`Description: ${activity.description}`}</h6>
                                 <h6>{`Duration: ${activity.duration}`}</h6>

@@ -14,7 +14,6 @@ const Activities = () => {
     return(
         <div>{activities.length ?
             activities.map((activity) => {
-                console.log(activity)
                 return(
                     <ActivityCard activity={activity} key={activity.id}/>
                 )
