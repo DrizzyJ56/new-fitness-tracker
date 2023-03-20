@@ -9,6 +9,7 @@ const client = new Pool({
     process.env.NODE_ENV === "production"
       ? { rejectUnauthorized: false }
       : undefined,
+  idleTimeoutMillis: 30000    
 });
 
 module.exports = client;

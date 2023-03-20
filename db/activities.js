@@ -18,7 +18,7 @@ async function createActivity({ name, description }) {
     `,
       [name, description]
     );
-
+    client.release()
     return activity;
   } catch (error) {
     throw error;
@@ -31,7 +31,7 @@ async function getAllActivities() {
     const { rows } = await client.query(`
       SELECT * FROM activities
     `);
-
+    client.release()
     return rows;
   } catch (error) {
     throw error;
@@ -50,7 +50,7 @@ async function getActivityByName(name) {
     `,
       [name]
     );
-
+    client.release()
     return activity;
   } catch (error) {
     throw error;
@@ -69,7 +69,7 @@ async function getActivityById(id) {
     `,
       [id]
     );
-
+    client.release()
     return activity;
   } catch (error) {
     throw error;
@@ -94,8 +94,10 @@ async function updateActivity({ id, ...fields }) {
         RETURNING *
       `,
         Object.values(fields)
-      );
 
+        
+      );
+      client.release()
       return await getActivityById(id);
     }
   } catch (error) {
@@ -132,6 +134,7 @@ async function attachActivitiesToRoutines(routines) {
       // attach the activities to each single routine
       routine.activities = activitiesToAdd;
     }
+    client.release()
     return routinesToReturn;
   } catch (error) {
     throw error;

@@ -112,6 +112,7 @@ async function getPublicRoutinesByUser({ username }) {
     `,
       [username]
     );
+    client.release()
     return attachActivitiesToRoutines(rows);
   } catch (error) {
     throw error;
@@ -131,6 +132,7 @@ async function getPublicRoutinesByActivity({ id }) {
     `,
       [id]
     );
+    client.release()
     return attachActivitiesToRoutines(rows);
   } catch (error) {
     throw error;
@@ -156,6 +158,7 @@ async function updateRoutine({ id, ...fields }) {
         Object.values(fields)
       );
     }
+    client.release()
     return getRoutineById(id);
   } catch (error) {
     throw error;
@@ -173,6 +176,7 @@ async function destroyRoutine(id) {
       DELETE FROM routines
       WHERE id=${id};
     `);
+    client.release()
   } catch (error) {
     throw error;
   }
