@@ -46,17 +46,18 @@ usersRouter.post("/login", async (req, res, next) => {
 
 // POST /api/users/register
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password } = req.body;
+  const info = req.body;
+  
   try {
-    const doesUserExist = await getUserByUsernameWithPassword(username);
+    const doesUserExist = await getUserByUsernameWithPassword(info.username);
     if (doesUserExist) {
       next({
         name: "userAlreadyExistsError",
         message: "A user already exists with this information",
       });
     }
-    if (password.length >= 8) {
-      const user = await createUser({ username, password });
+    if (password.length > 7) {
+      const user = await createUser(info);
 
       const token = jwt.sign(
         {

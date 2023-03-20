@@ -10,7 +10,9 @@ const Register = (props) => {
     const navigate = useNavigate()
 
     const sendData = async () =>{
-        if(username.length >= 3 && password.length >= 8 && confirmedPassword === password){
+        if(username.length > 2 && password.length > 7 && confirmedPassword === password){
+            console.log(username, "USERNAME")
+            console.log(password, "PASSWORD")
             const data = await registerUser(username, password)
             console.log(data)
 
