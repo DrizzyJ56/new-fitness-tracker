@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../api-adapters";
+import { registerUserToDatabase } from "../api-adapters";
 
 const Register = (props) => {
     const setLoggedIn = props.setLoggedIn
@@ -13,20 +13,19 @@ const Register = (props) => {
         if(username.length > 2 && password.length > 7 && confirmedPassword === password){
             console.log(username, "USERNAME")
             console.log(password, "PASSWORD")
-            const data = await registerUser(username, password)
-            console.log(data)
+            const data = await registerUserToDatabase(username, password)
+            localStorage.setItem("token", data.token)
 
             setUsername("")
             setPassword("")
             setConfirmedPassword("")
             setLoggedIn(true)
-            alert("You are successfully registered!")
+            alert(data.message)
             navigate("/")
         }else{
             alert("Error registering! Please check your username and password according to requirements. ")
         }
     }
-    // localStorage.setItem("token", data)
     return(
         <div>
             <form id="register-form" onSubmit={(e)=>{
