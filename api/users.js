@@ -57,7 +57,7 @@ usersRouter.post("/register", async (req, res, next) => {
         message: "A user already exists with this information",
       });
     }
-    if (password.length > 7) {
+    if (info.password.length > 7) {
       const user = await createUser(info);
 
       const token = jwt.sign(
