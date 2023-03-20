@@ -6,11 +6,11 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem("token"))
     return(
         <div>
-            <Navbar />
+            <Navbar setLoggedIn={setLoggedIn} loggedIn={loggedIn} setToken={setToken} />
             <Routes>
-                <Route exact path="/" element={<Home />} />
+                <Route exact path="/" element={<Home token={token} setLoggedIn={setLoggedIn}/>} />
                 <Route exact path="/register" element={<Register setLoggedIn={setLoggedIn} />} />
-                <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn} token={token} />} />
+                <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
             </Routes>
         </div>
     )
