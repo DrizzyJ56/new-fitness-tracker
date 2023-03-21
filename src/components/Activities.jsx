@@ -8,6 +8,7 @@ const Activities = (props) => {
     const [activities, setActivities] = useState ([])
     const [name, setName] = useState("")
     const [desc, setDesc] = useState("")
+    const [alert, setAlert] = useState("")
     const getActivities = async function(){
         const data = await ActivitiesDatabase()
         setActivities(data)
@@ -15,17 +16,17 @@ const Activities = (props) => {
     const postActivity = async function(){
         const data = await postActivityToDB(name, desc, token)
         if(data.message){
-            alert(data.message)
+            setAlert(`Error: ${data.message}`)
         }else{
-            alert("Successfully created Activity")
+            setAlert(`Successfully created Activity ${name}`)
             setName("")
             setDesc("")
-            location.reload()
+            // location.reload()
         }
     }
     useEffect(() => {
         getActivities()
-    },[])
+    },[token])
     return(
         <div>
             { loggedIn ? 
@@ -44,6 +45,7 @@ const Activities = (props) => {
                 <button type="submit">Submit</button>
             </form> : null
             }
+            {alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
             <div>{activities.length ?
                 activities.map((activity) => {
                     return(

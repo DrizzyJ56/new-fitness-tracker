@@ -9,6 +9,7 @@ const MyRoutines = (props) => {
     const [routines, setRoutines] = useState([])
     const [name, setName] = useState("")
     const [goal, setGoal] = useState("")
+    const [alert, setAlert] = useState("")
     const [isPublic, setIsPublic] = useState(true)
     const navigate = useNavigate()
     let routineArr = []
@@ -30,9 +31,9 @@ const MyRoutines = (props) => {
         if(name.length && goal.length){
             const data = await postRoutineToDB(token, name, goal, isPublic)
             if(data.goal){
-                alert(`You have made ${name} successfully`)
-            }else{
-                alert(`A routine named ${name} already exists`)
+                setAlert(`You have made ${name} successfully`)
+            }else if(data.message){
+                setAlert(`Error: ${data.message}`)
             }
         }
     }
@@ -67,6 +68,7 @@ const MyRoutines = (props) => {
                     }} />
                     <button type="submit">Submit</button>
                 </form>
+            { alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
             </div>
             <div id="myroutines-routines">
                 {routines ?
