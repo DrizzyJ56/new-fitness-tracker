@@ -20,7 +20,7 @@ const App = () => {
                 <Route exact path="/register" element={<Register setLoggedIn={setLoggedIn} />} />
                 <Route exact path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
                 <Route exact path="/routines" element={<Routines />} />
-                <Route exact path="/activities" element={<Activities />} />
+                <Route exact path="/activities" element={<Activities loggedIn={loggedIn} token={token}/>} />
                 <Route exact path="/myroutines" element={<MyRoutines token={token} />} />
                 <Route exact path="/routines/:id/edit" element={<EditRoutine token={token} />}/>
                 <Route exact path="/routines/:id/addActivity" element={<AddActivity />} />

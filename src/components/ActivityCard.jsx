@@ -6,8 +6,6 @@ const ActivityCard = (props) => {
         <div className="Activity">
             <h6>{`Name: ${activity.name}`}</h6>
             <h6>{`Description: ${activity.description}`}</h6>
-            <h6>{`Duration: ${activity.duration}`}</h6>
-            <h6>{`count: ${activity.count}`}</h6>
             <h6>{`ID: ${activity.id}`}</h6>
         </div>
     )

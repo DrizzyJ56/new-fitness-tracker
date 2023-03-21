@@ -1,24 +1,57 @@
 import React, {useEffect, useState} from "react"
-import {ActivitiesDatabase} from "../api-adapters"
+import {ActivitiesDatabase, postActivityToDB} from "../api-adapters"
 import {ActivityCard} from "./"
 
-const Activities = () => {
+const Activities = (props) => {
+    const loggedIn = props.loggedIn
+    const token = props.token
     const [activities, setActivities] = useState ([])
+    const [name, setName] = useState("")
+    const [desc, setDesc] = useState("")
     const getActivities = async function(){
         const data = await ActivitiesDatabase()
         setActivities(data)
+    }
+    const postActivity = async function(){
+        const data = await postActivityToDB(name, desc, token)
+        if(data.message){
+            alert(data.message)
+        }else{
+            alert("Successfully created Activity")
+            setName("")
+            setDesc("")
+            location.reload()
+        }
     }
     useEffect(() => {
         getActivities()
     },[])
     return(
-        <div>{activities.length ?
-            activities.map((activity) => {
-                return(
-                    <ActivityCard activity={activity} key={activity.id}/>
-                )
-            }) : null
-        }</div>
+        <div>
+            { loggedIn ? 
+            <form onSubmit={(e)=>{
+                e.preventDefault()
+                postActivity()
+            }}>
+                <label>Name:</label>
+                <input required type="text" onChange={(e)=>{
+                    setName(e.target.value)
+                }} />
+                <label>Description:</label>
+                <input required type="text" onChange={(e)=>{
+                    setDesc(e.target.value)
+                }} />
+                <button type="submit">Submit</button>
+            </form> : null
+            }
+            <div>{activities.length ?
+                activities.map((activity) => {
+                    return(
+                        <ActivityCard activity={activity} key={activity.id}/>
+                    )
+                }) : null
+            }</div>
+        </div>
     )
 }
 
