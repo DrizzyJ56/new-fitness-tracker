@@ -95,8 +95,9 @@ usersRouter.get("/me", requireUser, async (req, res, next) => {
         name: "UserError",
         message: "Need to log in",
       });
+    }else{
+      res.send(req.user);
     }
-    res.send(req.user);
   } catch ({ name, message }) {
     next({ name, message });
   }
