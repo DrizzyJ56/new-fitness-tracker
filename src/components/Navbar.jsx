@@ -6,9 +6,6 @@ const Navbar = (props) => {
     const setLoggedIn = props.setLoggedIn
     const setToken = props.setToken
     const token = props.token
-    if(token){
-        setLoggedIn(true)
-    }
     const navigate = useNavigate()
     return(<div id="nav">
             <Link to="/"><h3>Home</h3></Link>

@@ -11,6 +11,7 @@ const MyRoutines = (props) => {
     const [goal, setGoal] = useState("")
     const [isPublic, setIsPublic] = useState(true)
     const navigate = useNavigate()
+    let routineArr = []
     const getUser = async () => {
         if(token){
             const data = await getLoggedInUserFromDB(token)
@@ -18,7 +19,7 @@ const MyRoutines = (props) => {
         }
     }
 
-    const getRoutines = async () => {
+     const getRoutines = async () => {
         if(user.username){
             const data = await getUserRoutinesFromDB(user.username, token)
             setRoutines(data)
@@ -30,7 +31,6 @@ const MyRoutines = (props) => {
             const data = await postRoutineToDB(token, name, goal, isPublic)
             if(data.goal){
                 alert(`You have made ${name} successfully`)
-                navigate("/routines")
             }else{
                 alert(`A routine named ${name} already exists`)
             }
@@ -39,7 +39,7 @@ const MyRoutines = (props) => {
 
     useEffect(()=>{
         getUser()
-    },[])
+    },[token])
     useEffect(()=>{
         getRoutines()
     },[user])
@@ -48,9 +48,10 @@ const MyRoutines = (props) => {
         <div>
             <div id="myroutines-form">
                 <h3>Make a new routine!</h3>
-                <form onSubmit={(e)=>{
+                <form onSubmit={async (e)=>{
                     e.preventDefault()
-                    postRoutine()
+                    await postRoutine()
+                    getRoutines()
                 }}>
                     <label>Name</label>
                     <input required type="text" onChange={(e)=>{
@@ -61,7 +62,7 @@ const MyRoutines = (props) => {
                         setGoal(e.target.value)
                     }} />
                     <label>isPublic:</label>
-                    <input type="checkbox" value={isPublic} onChange={()=>{
+                    <input type="checkbox" checked={isPublic} onChange={()=>{
                         setIsPublic(!isPublic)
                     }} />
                     <button type="submit">Submit</button>
@@ -72,8 +73,13 @@ const MyRoutines = (props) => {
                 routines.map((routine, idx) => {
                     return(
                         <div key={`000${idx}`}>
-                            <RoutineCard routine={routine} />
-                            <Link to={`/routines/${routine.id}/edit`} state={{data: routine}}><p>Edit</p></Link>
+                            <RoutineCard token={token} routine={routine} />
+                            {/* <Link to={`/routines/${routine.id}/addActivity`} state={{data: routine}}><button>Add Activity</button></Link>
+                            <Link to={`/routines/${routine.id}/edit`} state={{data: routine}}><button>Edit</button></Link>
+                            <button onClick={async ()=>{
+                                await deleteRoutineFromDB(routine.id, token)
+                                getRoutines()
+                            }}>Delete</button> */}
                         </div>
                     )
                 }) : null

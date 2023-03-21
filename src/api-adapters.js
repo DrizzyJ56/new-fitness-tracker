@@ -147,5 +147,98 @@ export const getLoggedInUserFromDB = async (token) => {
       console.error(err);
     }
   }
-      
+
+  export const deleteRoutineFromDB = async (routineId,token) => {
+    try {
+      const response = await fetch(`${BASE_URL}/routines/${routineId}`, {
+        method: "DELETE",
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+      console.error(err);
+    }
+}
+
+export const getActivitiesFromDB = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const attachActivityToRoutine = async (routineId, activityId, count, duration) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routines/${routineId}/activities`, {
+      method: "POST",
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        activityId: activityId,
+        count: count, 
+        duration: duration
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const updateRoutineActivitiesInDB = async (routineActivityId, token, count, duration) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      method: "PATCH",
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        count: count,
+        duration: duration
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const removeActivityFromRoutine = async (routineActivityId, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      method: "DELETE",
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+    
       
