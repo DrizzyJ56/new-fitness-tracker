@@ -10,14 +10,15 @@ const EditRoutineActivity = (props) => {
     const navigate = useNavigate()
     const [count, setCount] = useState(activity.count)
     const [duration, setDuration] = useState(activity.duration)
+    const [alert, setAlert] = useState("")
 
     const updateRoutineActivity = async () =>{
         if(routineActivityID && count && duration){
             const data = await updateRoutineActivitiesInDB(routineActivityID, token, count, duration)
             if(data.message){
-                alert(data.message)
+                setAlert(data.message)
             }else{
-                alert("You have successfully updated this RoutineActivity")
+                setAlert("You have successfully updated this RoutineActivity")
                 navigate("/myroutines")
             }
         }
@@ -41,6 +42,7 @@ const EditRoutineActivity = (props) => {
                 }} />
                 <button type="submit">Submit</button>
             </form>
+            {alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
         </div>
     )
 }

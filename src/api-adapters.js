@@ -263,5 +263,57 @@ export const postActivityToDB = async (name, desc, token) => {
     console.error(err);
   }
 }
-    
+
+export const getUserPublicRoutinesFromDB = async (username) => {
+
+  try {
+    const response = await fetch(`${BASE_URL}/users/${username}/routines`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const getRoutinesByActivityFromDB = async (activityId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities/${activityId}/routines`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
       
+export const editActivityInDB = async (id, token, name, description) => {
+  try {
+    const response = await fetch(`${BASE_URL}/activities/${id}`, {
+      headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      },
+      method: "PATCH",
+      body: JSON.stringify({
+        name: name,
+        description: description
+      })
+    });
+
+      const result = await response.json();
+      console.log(result);
+      return result
+    } catch (err) {
+    console.error(err);
+    }
+}
+   

@@ -49,7 +49,7 @@ const Activities = (props) => {
             <div>{activities.length ?
                 activities.map((activity) => {
                     return(
-                        <ActivityCard activity={activity} key={activity.id}/>
+                        <ActivityCard loggedIn={loggedIn} activity={activity} key={activity.id}/>
                     )
                 }) : null
             }</div>

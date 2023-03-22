@@ -8,22 +8,42 @@ const AddActivity = () =>{
     const navigate = useNavigate()
     const routine = location.state?.data;
     const routineId = routine?.id
+    let actArr = []
+    let badArr = []
+    let newArr = []
     const [activities, setActivities] = useState([])
     const [count, setCount] = useState(0)
     const [duration, setDuration] = useState(0)
+    const [alert, setAlert] = useState("")
     const getActivities = async () =>{
         const data = await getActivitiesFromDB()
-        setActivities(data)
+        for(let i=0; i<routine.activities.length; i++){
+            badArr.push(routine.activities[i].name)
+        }
+        for(let k=0; k<data.length; k++){
+            newArr.push(data[k])
+        }
+        newArr.filter((name,idx)=>{
+            // console.log(newArr[idx].name)
+            if(!badArr.includes(newArr[idx].name)){
+                actArr.push(newArr[idx])
+            }
+        })
+        setActivities(actArr)
+        actArr=[]
+        badArr=[]
     }
 
     const activityToRoutine = async () =>{
         let activityId = selector.value
         if(activityId && routineId){
             const data = await attachActivityToRoutine(routineId, activityId, count, duration)
-            alert("Activity was successfully added to routine")
-            navigate("/myroutines")
-        }else{
-            alert("Activity could not be added to routine")
+            if(data.message){
+                setAlert(data.message)
+            }else{
+                setAlert("Activity was successfully added to routine")
+                navigate("/myroutines")
+            }
         }
     }
 
@@ -55,6 +75,7 @@ const AddActivity = () =>{
                 }} />
                 <button type="submit">Submit</button>
             </form>
+            {alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
         </div>
     )
 }

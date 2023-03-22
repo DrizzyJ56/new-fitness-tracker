@@ -5,17 +5,19 @@ import { loginUserToDatabase } from "../api-adapters";
 const Login = (props) =>{
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [alert, setAlert] = useState("")
     const setLoggedIn = props.setLoggedIn
     const navigate = useNavigate()
+    let data = null
 
     const loginUser = async ()=>{
-        const data = await loginUserToDatabase(username,password)
+        data = await loginUserToDatabase(username,password)
         if(data.token){
             localStorage.setItem("token", data.token)
             setLoggedIn(true)
             navigate("/")
         }else{
-            alert(data.message)
+            setAlert(data.message)
         }
     }
     return(
@@ -25,22 +27,26 @@ const Login = (props) =>{
                 <Link to="/register"><p>Register</p></Link>
             </div>
             <h2>Login</h2>
-            <form onSubmit={(e)=>{
+            <form onSubmit={async (e)=>{
                 e.preventDefault()
                 setUsername("")
                 setPassword("")
-                loginUser()
+                await loginUser()
+                if(data.token){
+                    location.reload()
+                }
             }}>
                 <label>Username:</label>
-                <input required type="text" onChange={(e)=>{
+                <input required type="text" value={username} onChange={(e)=>{
                     setUsername(e.target.value)
                 }} />
                 <label>Password:</label>
-                <input required type="password" onChange={(e)=>{
+                <input required type="password" value={password} onChange={(e)=>{
                     setPassword(e.target.value)
                 }} />
                 <button type="submit">Submit</button>
             </form>
+            {alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
         </div>
     )
 }

@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react"
 import {RoutinesDatabase} from "../api-adapters"
 import {RoutineCard} from "./"
 
-const Routines = () => {
+const Routines = (props) => {
+    const token = props.token
     const [routines, setRoutines] = useState ([])
     const getRoutines = async function(){
         const data = await RoutinesDatabase()
@@ -15,7 +16,7 @@ const Routines = () => {
         <div>{routines.length ?
             routines.map((routine) => {
                 return(
-                    <RoutineCard routine={routine} key={routine.id}/>
+                    <RoutineCard token={token} routine={routine} key={routine.id}/>
                 )
             }) : null
         }</div>
