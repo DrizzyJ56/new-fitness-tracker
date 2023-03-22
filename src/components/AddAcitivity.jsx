@@ -54,7 +54,7 @@ const AddActivity = () =>{
     
     return(
         <div>
-            <form onSubmit={(e)=>{
+            <form id="addActivityForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 selector = document.querySelector("#dropdown option:checked")
                 activityToRoutine()

@@ -5,7 +5,7 @@ const ActivityCard = (props) => {
   const activity = props.activity;
   const loggedIn = props.loggedIn
   return (
-    <div className="Activity">
+    <div id="ActivityCard" className="Card">
       <Link
         to={`/activity/${activity.id}/routines`}
         style={{ textDecoration: "none", color: "black" }}

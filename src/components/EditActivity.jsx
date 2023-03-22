@@ -25,7 +25,7 @@ const EditActivity = (props) =>{
     }
     return(
         <div id="editActivity-container">
-            <form onSubmit={(e)=>{
+            <form id="editActivityForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 submitEditedActivity()
             }}>

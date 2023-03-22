@@ -30,7 +30,7 @@ const Activities = (props) => {
     return(
         <div>
             { loggedIn ? 
-            <form onSubmit={(e)=>{
+            <form id="activitiesForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 postActivity()
             }}>

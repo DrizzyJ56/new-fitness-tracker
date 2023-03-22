@@ -27,7 +27,7 @@ const Login = (props) =>{
                 <Link to="/register"><p>Register</p></Link>
             </div>
             <h2>Login</h2>
-            <form onSubmit={async (e)=>{
+            <form id="loginForm" className="form" onSubmit={async (e)=>{
                 e.preventDefault()
                 setUsername("")
                 setPassword("")

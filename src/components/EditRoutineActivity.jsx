@@ -28,7 +28,7 @@ const EditRoutineActivity = (props) => {
     return(
         <div>
             <h3>{activity.name}</h3>
-            <form onSubmit={(e)=>{
+            <form id="editRoutineActivityForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 updateRoutineActivity()
             }}>

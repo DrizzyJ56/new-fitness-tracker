@@ -47,9 +47,9 @@ const MyRoutines = (props) => {
 
     return(
         <div>
-            <div id="myroutines-form">
+            <div id="myRoutinesFormContainer" >
                 <h3>Make a new routine!</h3>
-                <form onSubmit={async (e)=>{
+                <form id="routinesForm" className="form" onSubmit={async (e)=>{
                     e.preventDefault()
                     await postRoutine()
                     getRoutines()

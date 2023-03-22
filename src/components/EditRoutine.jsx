@@ -23,7 +23,7 @@ const EditRoutine = (props) => {
   };
   return (
     <div>
-      <form
+      <form id="editRoutineForm" className="form"
         onSubmit={(e) => {
           e.preventDefault();
           editIt();

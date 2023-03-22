@@ -31,7 +31,7 @@ const Register = (props) => {
     }
     return(
         <div>
-            <form id="register-form" onSubmit={(e)=>{
+            <form id="registerForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 sendData()
             }}>

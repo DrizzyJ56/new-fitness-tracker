@@ -22,10 +22,10 @@ const RoutineCard = (props) => {
     whoIsLoggedIn();
   }, [token]);
   return (
-    <div id="routineCard-container">
+    <div id="routineCard-container" className="Card">
       <div id="routineCard-routines">
         <h3>{`Name: ${routine.name}`}</h3>
-        <Link to={`/routines/${routine.creatorName}/public`} style={{textDecoration: "none", color: "black"}}><h4>{`Creator: ${routine.creatorName}`}</h4></Link>
+        <Link to={`/routines/${routine.creatorName}/public`} style={{textDecoration: "none", color: "blue"}}><h4>{`Creator: ${routine.creatorName}`}</h4></Link>
         <h5>{`Goal: ${routine.goal}`}</h5>
         <h5>{`isPublic: ${routine.isPublic}`}</h5>
         <h5>{`ID: ${routine.id}`}</h5>
