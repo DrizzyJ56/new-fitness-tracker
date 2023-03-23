@@ -11,8 +11,9 @@ const MyRoutines = (props) => {
     const [goal, setGoal] = useState("")
     const [alert, setAlert] = useState("")
     const [isPublic, setIsPublic] = useState(true)
-    const navigate = useNavigate()
-    let routineArr = []
+    let noArr = []
+    let yesArr = []
+    let finalArr = []
     const getUser = async () => {
         if(token){
             const data = await getLoggedInUserFromDB(token)
@@ -23,7 +24,20 @@ const MyRoutines = (props) => {
      const getRoutines = async () => {
         if(user.username){
             const data = await getUserRoutinesFromDB(user.username, token)
-            setRoutines(data)
+        await data.filter((routine)=>{
+            if(routine.activities.length){
+                yesArr.push(routine)
+            }else{
+                noArr.push(routine)
+            }
+        })
+        for(let i =0; i<yesArr.length; i++){
+            finalArr.push(yesArr[i])
+        }
+        for(let k=0; k<noArr.length; k++){
+            finalArr.push(noArr[k])
+        }
+        setRoutines(finalArr)
         }
     }
 
@@ -46,14 +60,14 @@ const MyRoutines = (props) => {
     },[user])
 
     return(
-        <div>
+        <div id="myRoutinesContainer">
             <div id="myRoutinesFormContainer" >
-                <h3>Make a new routine!</h3>
                 <form id="routinesForm" className="form" onSubmit={async (e)=>{
                     e.preventDefault()
                     await postRoutine()
                     getRoutines()
                 }}>
+                    <h3>Make a new routine!</h3>
                     <label>Name</label>
                     <input required type="text" onChange={(e)=>{
                         setName(e.target.value)
@@ -74,7 +88,7 @@ const MyRoutines = (props) => {
                 {routines ?
                 routines.map((routine, idx) => {
                     return(
-                        <div key={`000${idx}`}>
+                        <div id="myRoutinesCard" key={`000${idx}`}>
                             <RoutineCard token={token} routine={routine} />
                             {/* <Link to={`/routines/${routine.id}/addActivity`} state={{data: routine}}><button>Add Activity</button></Link>
                             <Link to={`/routines/${routine.id}/edit`} state={{data: routine}}><button>Edit</button></Link>

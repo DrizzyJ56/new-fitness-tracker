@@ -27,11 +27,11 @@ const EditRoutineActivity = (props) => {
 
     return(
         <div>
-            <h3>{activity.name}</h3>
             <form id="editRoutineActivityForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
                 updateRoutineActivity()
             }}>
+                <h3>{activity.name}</h3>
                 <label>Count:</label>
                 <input required type="number" value={count} onChange={(e)=>{
                     setCount(e.target.value)

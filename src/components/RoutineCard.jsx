@@ -24,11 +24,11 @@ const RoutineCard = (props) => {
   return (
     <div id="routineCard-container" className="Card">
       <div id="routineCard-routines">
-        <h3>{`Name: ${routine.name}`}</h3>
-        <Link to={`/routines/${routine.creatorName}/public`} style={{textDecoration: "none", color: "blue"}}><h4>{`Creator: ${routine.creatorName}`}</h4></Link>
-        <h5>{`Goal: ${routine.goal}`}</h5>
-        <h5>{`isPublic: ${routine.isPublic}`}</h5>
-        <h5>{`ID: ${routine.id}`}</h5>
+        <h3>{`Name: `}<span className="test">{routine.name}</span></h3>
+        <Link to={`/routines/${routine.creatorName}/public`} style={{textDecoration: "none", color: "green"}}><h4>{`Creator: `} <span>{routine.creatorName}</span></h4></Link>
+        <h5>{`Goal: `} <span className="test">{routine.goal}</span></h5>
+        <h5>{`isPublic: ${routine.isPublic}`}<span className="test"></span></h5>
+        <h5>{`ID: `}<span className="test">{routine.id}</span></h5>
         {user && user.username === routine.creatorName ? (
           <Link
             to={`/routines/${routine.id}/addActivity`}
@@ -59,24 +59,26 @@ const RoutineCard = (props) => {
           </button>
         ) : null}
       </div>
-      <div id="routineCard-activities">
         <h5>{`Activities:`}</h5>
+      <div id="routineCard-activities">
         {routine.activities.map((activity, idx) => {
           return (
-            <div className="Activity" key={idx}>
-              <Link to={`/activity/${activity.id}/routines`} style={{textDecoration: "none", color: "black"}}><h6>{`Name: ${activity.name}`}</h6></Link>
-              <h6>{`Description: ${activity.description}`}</h6>
-              <h6>{`Duration: ${activity.duration}`}</h6>
-              <h6>{`count: ${activity.count}`}</h6>
+            <div className="Activity" id="activitiesRoutineCard" key={idx}>
+              <Link to={`/activity/${activity.id}/routines`} style={{textDecoration: "none", color: "green"}}><h6 >{`Name: `}<span>{activity.name}</span></h6></Link>
+              <h6 className="title">{`Description:`} <span className="test">{activity.description}</span></h6>
+              <h6 className="title">{`Duration: `} <span className="test">{activity.duration}</span></h6>
+              <h6 className="title">{`count: `}<span className="test">{activity.count}</span></h6>
               {user && user.username === routine.creatorName ? (
+                <div id="buttons">
                 <Link
                   to={`/routineActivity/${activity.routineActivityId}/edit`}
                   state={{ data: activity }}
                 >
                   <button>Edit</button>
                 </Link>
-              ) : null}
-              {user && user.username === routine.creatorName ? (
+              
+              
+                
                 <button
                   onClick={async (e) => {
                     e.preventDefault();
@@ -94,6 +96,7 @@ const RoutineCard = (props) => {
                 >
                   Delete
                 </button>
+                </div>
               ) : null}
             </div>
           );

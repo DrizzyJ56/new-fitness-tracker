@@ -28,7 +28,7 @@ const Activities = (props) => {
         getActivities()
     },[token])
     return(
-        <div>
+        <div id="activities-container">
             { loggedIn ? 
             <form id="activitiesForm" className="form" onSubmit={(e)=>{
                 e.preventDefault()
@@ -46,7 +46,7 @@ const Activities = (props) => {
             </form> : null
             }
             {alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
-            <div>{activities.length ?
+            <div id="activities-card-container">{activities.length ?
                 activities.map((activity) => {
                     return(
                         <ActivityCard loggedIn={loggedIn} activity={activity} key={activity.id}/>
