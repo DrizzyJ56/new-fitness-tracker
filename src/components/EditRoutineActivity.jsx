@@ -16,7 +16,7 @@ const EditRoutineActivity = (props) => {
         if(routineActivityID && count && duration){
             const data = await updateRoutineActivitiesInDB(routineActivityID, token, count, duration)
             if(data.message){
-                setAlert(data.message)
+                setAlert(`Error: ${data.message}`)
             }else{
                 setAlert("You have successfully updated this RoutineActivity")
                 navigate("/myroutines")

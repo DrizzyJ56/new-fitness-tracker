@@ -34,16 +34,21 @@ const RoutineCard = (props) => {
             to={`/routines/${routine.id}/addActivity`}
             state={{ data: routine }}
           >
-            <button>Add Activity</button>
+            <button 
+              className="routineCardButton" 
+            >
+            Add Activity</button>
           </Link>
         ) : null}
         {user && user.username === routine.creatorName ? (
           <Link to={`/routines/${routine.id}/edit`} state={{ data: routine }}>
-            <button>Edit</button>
+            <button
+              className="routineCardButton" 
+            >Edit</button>
           </Link>
         ) : null}
         {user && user.username === routine.creatorName ? (
-          <button
+          <button className="routineCardButton" 
             onClick={async (e) => {
               e.preventDefault();
               const data = await deleteRoutineFromDB(routine.id, token);

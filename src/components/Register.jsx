@@ -14,7 +14,7 @@ const Register = (props) => {
         if(username.length > 2 && password.length > 7 && confirmedPassword === password){
             const data = await registerUserToDatabase(username, password)
             if(data.name){
-                setAlert(data.message)
+                setAlert(`Error: ${data.message}`)
             }else{
                 localStorage.setItem("token", data.token)
     
@@ -35,6 +35,7 @@ const Register = (props) => {
                 e.preventDefault()
                 sendData()
             }}>
+                <h2>Register</h2>
                 <label>Username:</label>
                 <input required placeholder="Minimum 3 characters" value={username} min="3" type="text" onChange={(e)=>{
                     setUsername(e.target.value)

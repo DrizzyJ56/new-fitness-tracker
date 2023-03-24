@@ -10,7 +10,7 @@ const Home = (props) => {
           Welcome to Fitness Tracker's website developed by Joel Blevins and
           Sven Scharpen
         </p>
-        <Link to="/register">
+        <Link to="/register" style={{color:"white"}}>
           <p>If you have not registered yet, please click me!</p>
         </Link>
       </div>

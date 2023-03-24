@@ -14,14 +14,18 @@ const Activities = (props) => {
         setActivities(data)
     }
     const postActivity = async function(){
-        const data = await postActivityToDB(name, desc, token)
-        if(data.message){
-            setAlert(`Error: ${data.message}`)
+        if(desc.length < 150){
+            const data = await postActivityToDB(name, desc, token)
+            if(data.message){
+                setAlert(`Error: ${data.message}`)
+            }else{
+                setAlert(`Successfully created Activity ${name}`)
+                setName("")
+                setDesc("")
+                // location.reload()
+            }
         }else{
-            setAlert(`Successfully created Activity ${name}`)
-            setName("")
-            setDesc("")
-            // location.reload()
+            setAlert(`Error: Maximum description length is 150 characters, you have ${desc.length}.`)
         }
     }
     useEffect(() => {
@@ -39,7 +43,7 @@ const Activities = (props) => {
                     setName(e.target.value)
                 }} />
                 <label>Description:</label>
-                <input required type="text" onChange={(e)=>{
+                <input required type="text" placeholder="Max: 150 Characters" value={desc} onChange={(e)=>{
                     setDesc(e.target.value)
                 }} />
                 <button type="submit">Submit</button>

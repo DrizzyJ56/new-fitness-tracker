@@ -39,7 +39,7 @@ const AddActivity = () =>{
         if(activityId && routineId){
             const data = await attachActivityToRoutine(routineId, activityId, count, duration)
             if(data.message){
-                setAlert(data.message)
+                setAlert(`Error: ${data.message}`)
             }else{
                 setAlert("Activity was successfully added to routine")
                 navigate("/myroutines")

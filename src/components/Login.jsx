@@ -17,16 +17,15 @@ const Login = (props) =>{
             setLoggedIn(true)
             navigate("/")
         }else{
-            setAlert(data.message)
+            setAlert(`Error: ${data.message}`)
         }
     }
     return(
         <div>
             <div id="registration-div">
                 <p>If you are not registered, you can register here!</p>
-                <Link to="/register"><p>Register</p></Link>
+                <Link to="/register" style={{color:"#05c3de"}}><p>Register</p></Link>
             </div>
-            <h2>Login</h2>
             <form id="loginForm" className="form" onSubmit={async (e)=>{
                 e.preventDefault()
                 setUsername("")
@@ -36,6 +35,7 @@ const Login = (props) =>{
                     location.reload()
                 }
             }}>
+                <h2>Login</h2>
                 <label>Username:</label>
                 <input required type="text" value={username} onChange={(e)=>{
                     setUsername(e.target.value)

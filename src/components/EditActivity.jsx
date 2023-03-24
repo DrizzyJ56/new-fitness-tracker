@@ -15,12 +15,16 @@ const EditActivity = (props) =>{
     const navigate = useNavigate()
     
     const submitEditedActivity = async ()=>{
-        const data = await editActivityInDB(id, token, name, desc)
-        if(data.message){
-            setAlert(data.message)
+        if(desc.length < 150){
+            const data = await editActivityInDB(id, token, name, desc)
+            if(data.message){
+                setAlert(`Error: ${data.message}`)
+            }else{
+                setAlert(`${activity.name} has been edited successfully`)
+                navigate("/activities")
+            }
         }else{
-            setAlert(`${activity.name} has been edited successfully`)
-            navigate("/activities")
+            setAlert(`Error: Maximum description length is 150 characters, you have ${desc.length}.`)
         }
     }
     return(
@@ -34,7 +38,7 @@ const EditActivity = (props) =>{
                     setName(e.target.value)
                 }} />
                 <label>Description:</label>
-                <input required type="text" value={desc} onChange={(e)=>{
+                <input required type="text" placeholder="Max: 150 Characters" value={desc} onChange={(e)=>{
                     setDesc(e.target.value)
                 }} />
                 <button type="submit">Submit</button>

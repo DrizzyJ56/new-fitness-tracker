@@ -14,7 +14,7 @@ const EditRoutine = (props) => {
     if (name.length && goal.length) {
       const data = await editRoutineInDB(routine.id, token, name, goal);
       if(data.message){
-        setAlert(data.message)
+        setAlert(`Error: ${data.message}`)
       }else{
         setAlert(`${routine.name} has been successfully edited`);
         navigate("/routines");

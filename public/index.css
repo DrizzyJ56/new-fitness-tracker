@@ -1,5 +1,10 @@
 * {
   font-family: Helvetica;
+  margin:0px;
+}
+
+body{
+    background-color:rgb(30,30,30);
 }
 
 #nav {
@@ -8,6 +13,23 @@
   justify-content: space-evenly;
   font-size: 20px;
   background-color: black;
+  box-shadow: 0 2px 1px rgba(255, 255, 255, 0.09), 0 4px 2px rgba(255, 255, 255, 0.09),
+  0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
+  0 32px 16px rgba(255, 255, 255, 0.09);
+}
+
+#registration-div{
+    color:white;
+    text-align:center;
+    margin-top:15px;
+}
+#loginForm{
+    margin-top:25px;
+}
+
+#registerForm{
+    padding-top:15px;
+    margin-top:50px;
 }
 
 .Card {
@@ -20,9 +42,9 @@
   color: white;
   width: 25vw;
   padding: 15px;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
-    0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
-    0 32px 16px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 2px 1px rgba(255, 255, 255, 0.09), 0 4px 2px rgba(255, 255, 255, 0.09),
+    0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
+    0 32px 16px rgba(255, 255, 255, 0.09);
 }
 
 #myroutines-routines {
@@ -33,9 +55,14 @@
 #routineCard-container {
   height: fit-content;
 }
+#routineCard-routines{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
 #routineCard-activities {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 #activitiesRoutineCard {
@@ -45,13 +72,13 @@
   margin: 1vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 65vh;
+  align-items: space-between;
+  height: 45vh;
 }
-#activitiesRoutineCard button {
-  align-self: flex-end;
+#buttons{
+   margin-top:auto;
+   margin-bottom:5px;
+   
 }
 #myRoutinesContainer {
   margin-top: 5vh;
@@ -63,9 +90,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
-    0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
-    0 16px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 1px rgba(255, 255, 255, 0.09), 0 4px 2px rgba(255, 255, 255, 0.09),
+    0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
+    0 32px 16px rgba(255, 255, 255, 0.09);
   align-items: center;
   justify-content: center;
   padding-bottom: 2vh;
@@ -75,8 +102,28 @@
 #routinesForm {
   width: 50vw;
 }
+.routineCardButton{
+    width:8vw;
+}
 
-
+h2{
+    margin-bottom:10px;
+    margin-top:5px;
+}
+h3{
+    margin-top:8px;
+    margin-bottom:8px;
+}
+h5{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+h6{
+    margin:5px;
+}
+button{
+    margin:5px;
+}
 
 .test {
   color: #ff3131;
@@ -111,15 +158,30 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content:space-evenly;
     color: #eff;
+    box-shadow: 0 2px 1px rgba(255, 255, 255, 0.09), 0 4px 2px rgba(255, 255, 255, 0.09),
+    0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
+    0 32px 16px rgba(255, 255, 255, 0.09);
     background-color: #05c3de;
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
-    0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
-    0 32px 16px rgba(0, 0, 0, 0.09);
     height: 35vh;
     width: 40vw;
+    padding:10px;
 }
 #homepage-container{
     display: flex;
     justify-content: center;
+}
+
+#alert{
+    background-color:green;
+    color:white;
+    text-align:center;
+    margin:10px;
+}
+#alertError{
+    background-color:darkred;
+    color:white;
+    text-align:center;
+    margin:10px;
 }

@@ -17,8 +17,8 @@ const Navbar = (props) => {
                 localStorage.removeItem("token")
                 setLoggedIn(false)
                 setToken("")
-                alert("You have been successfully logged out")
                 navigate("/")
+                location.reload()
             }}>Logout</h3></Link>}
         </div>
     )
