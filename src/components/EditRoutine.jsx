@@ -9,26 +9,29 @@ const EditRoutine = (props) => {
   const navigate = useNavigate();
   const [name, setName] = useState(routine.name);
   const [goal, setGoal] = useState(routine.goal);
-  const [alert, setAlert] = useState("")
+  const [alert, setAlert] = useState("");
   const editIt = async () => {
     if (name.length && goal.length) {
       const data = await editRoutineInDB(routine.id, token, name, goal);
-      if(data.message){
-        setAlert(`Error: ${data.message}`)
-      }else{
+      if (data.message) {
+        setAlert(`Error: ${data.message}`);
+      } else {
         setAlert(`${routine.name} has been successfully edited`);
         navigate("/routines");
       }
     }
   };
   return (
-    <div>
-      <form id="editRoutineForm" className="form"
+    <div id="editRoutine-container">
+      <form
+        id="editRoutineForm"
+        className="form"
         onSubmit={(e) => {
           e.preventDefault();
           editIt();
         }}
       >
+        <h2>Edit Routine</h2>
         <label>Name:</label>
         <input
           required
@@ -49,7 +52,15 @@ const EditRoutine = (props) => {
         />
         <button type="submit">Submit</button>
       </form>
-      { alert.startsWith('Error') ? <div id="alertError"><p>{alert}</p></div> : <div id="alert"><p>{alert}</p></div> }
+      {alert.startsWith("Error") ? (
+        <div id="alertError">
+          <p>{alert}</p>
+        </div>
+      ) : (
+        <div id="alert">
+          <p>{alert}</p>
+        </div>
+      )}
     </div>
   );
 };

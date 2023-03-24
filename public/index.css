@@ -17,6 +17,9 @@ body{
   0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
   0 32px 16px rgba(255, 255, 255, 0.09);
 }
+#editRoutineActivity-container{
+  margin-top: 50px;
+}
 
 #registration-div{
     color:white;
@@ -30,6 +33,16 @@ body{
 #registerForm{
     padding-top:15px;
     margin-top:50px;
+}
+#editRoutineForm{
+  padding-bottom: 10px;
+}
+#editRoutineForm label{
+  padding-top: 10px;
+}
+
+#editRoutine-container{
+  margin-top: 50px;
 }
 
 .Card {
@@ -46,7 +59,12 @@ body{
     0 8px 4px rgba(255, 255, 255, 0.09), 0 16px 8px rgba(255, 255, 255, 0.09),
     0 32px 16px rgba(255, 255, 255, 0.09);
 }
-
+#addActivity-container{
+  margin-top: 50px;
+}
+#addActivityForm{
+  padding-top: 10px;
+}
 #myroutines-routines {
   justify-content: space-evenly;
   display: flex;

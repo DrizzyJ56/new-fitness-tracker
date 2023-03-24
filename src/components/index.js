@@ -1,16 +1,16 @@
-export {default as App} from "./App"
-export {default as Navbar} from "./Navbar"
-export {default as Home} from "./Home"
-export {default as Register} from "./Register"
-export {default as Login} from "./Login"
-export {default as Routines} from "./Routines"
-export {default as RoutineCard} from "./RoutineCard"
-export {default as Activities} from "./Activities"
-export {default as ActivityCard} from "./ActivityCard"
-export {default as MyRoutines} from "./MyRoutines"
-export {default as EditRoutine} from "./EditRoutine"
-export {default as AddActivity} from "./AddAcitivity"
-export {default as EditRoutineActivity} from "./EditRoutineActivity"
-export {default as RoutinesByUsername} from "./RoutinesByUsername.jsx"
-export {default as RoutinesByActivityId} from "./RoutinesByActivityId"
-export {default as EditActivity} from "./EditActivity"
+export { default as App } from "./App";
+export { default as Navbar } from "./Navbar";
+export { default as Home } from "./Home";
+export { default as Register } from "./Register";
+export { default as Login } from "./Login";
+export { default as Routines } from "./Routines";
+export { default as RoutineCard } from "./RoutineCard";
+export { default as Activities } from "./Activities";
+export { default as ActivityCard } from "./ActivityCard";
+export { default as MyRoutines } from "./MyRoutines";
+export { default as EditRoutine } from "./EditRoutine";
+export { default as AddActivity } from "./AddAcitivity";
+export { default as EditRoutineActivity } from "./EditRoutineActivity";
+export { default as RoutinesByUsername } from "./RoutinesByUsername.jsx";
+export { default as RoutinesByActivityId } from "./RoutinesByActivityId";
+export { default as EditActivity } from "./EditActivity";

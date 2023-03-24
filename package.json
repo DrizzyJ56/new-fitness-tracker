@@ -11,7 +11,8 @@
     "start": "node server.js",
     "test": "jest --runInBand",
     "test:watch": "jest --runInBand --watchAll",
-    "start:front": "react-scripts start"
+    "start:front": "react-scripts start",
+    "build:front": "react-scripts build"
   },
   "keywords": [
     "node",
