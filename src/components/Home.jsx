@@ -6,6 +6,7 @@ const Home = (props) => {
   const token = props.token;
   const [user, setUser] = useState({});
   const checkForUser = async () => {
+    location.reload()
     if (token) {
       const data = await getLoggedInUserFromDB(token);
       setUser(data);
