@@ -28,6 +28,7 @@ const Register = (props) => {
         setLoggedIn(true);
         setAlert(data.message);
         navigate("/");
+        location.reload()
       }
     } else {
       setAlert(

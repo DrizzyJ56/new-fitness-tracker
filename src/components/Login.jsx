@@ -15,6 +15,7 @@ const Login = (props) => {
       localStorage.setItem("token", data.token);
       setLoggedIn(true);
       navigate("/");
+      location.reload()
     } else {
       setAlert(`Error: ${data.message}`);
     }
